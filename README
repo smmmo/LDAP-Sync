@@ -5,3 +5,8 @@ The homepage can be found at http://www.danielweisser.de/blog
 The source is hosted at https://github.com/weisserd/LDAP-Sync
 
 This project is licensed under the Apache License v2.0.
+
+
+---
+
+This fork adds a minimal gui to change settings.
