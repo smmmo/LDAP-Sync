@@ -31,8 +31,8 @@ import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.text.TextUtils;
-import de.danielweisser.android.ldapsync.client.Address;
-import de.danielweisser.android.ldapsync.client.Contact;
+import de.danielweisser.android.ldapsync.model.Address;
+import de.danielweisser.android.ldapsync.model.Contact;
 import de.danielweisser.android.ldapsync.syncadapter.Logger;
 
 /**
@@ -194,7 +194,7 @@ public class ContactMerger {
 		}
 	}
 
-	private void updateAddress(de.danielweisser.android.ldapsync.client.Address newAddress, Address existingAddress, int adressType) {
+	private void updateAddress(de.danielweisser.android.ldapsync.model.Address newAddress, Address existingAddress, int adressType) {
 		final String selection = Data.RAW_CONTACT_ID + "=? AND " + Data.MIMETYPE + "=? AND " + StructuredPostal.TYPE + "=?";
 		if ((newAddress == null || newAddress.isEmpty()) && existingAddress != null) {
 			l.d("Delete address " + adressType + "(" + existingC.getFirstName() + " " + existingC.getLastName() + ")");

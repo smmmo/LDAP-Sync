@@ -44,6 +44,9 @@
 	<string name="login_activity_country_label">Country</string>
 	<string name="login_activity_next_button">Next</string>
 	<string name="login_activity_done_button">Done</string>
+	
+	<string name="edit_settings_header">Properties</string>
+	<string name="edit_settings_done_button">Save</string>
 
 	<!-- Message shown in dialog if the username or password is invalid. -->
 	<string name="login_activity_loginfail">The username or password isn\'t valid. A LDAP

@@ -33,10 +33,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import de.danielweisser.android.ldapsync.Constants;
-import de.danielweisser.android.ldapsync.authenticator.LDAPAuthenticatorActivity;
 import de.danielweisser.android.ldapsync.client.LDAPServerInstance;
 import de.danielweisser.android.ldapsync.client.LDAPUtilities;
-import de.danielweisser.android.ldapsync.client.Contact;
+import de.danielweisser.android.ldapsync.model.Contact;
 import de.danielweisser.android.ldapsync.platform.ContactManager;
 
 /**
@@ -70,33 +69,33 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		try {
 			// use the account manager to request the credentials
 			authtoken = mAccountManager.blockingGetAuthToken(account, Constants.AUTHTOKEN_TYPE, true /* notifyAuthFailure */);
-			final String host = mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_HOST);
-			final String username = mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_USERNAME);
-			final int port = Integer.parseInt(mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_PORT));
-			final String sEnc = mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_ENCRYPTION);
+			final String host = mAccountManager.getUserData(account, Constants.PARAM_HOST);
+			final String username = mAccountManager.getUserData(account, Constants.PARAM_USERNAME);
+			final int port = Integer.parseInt(mAccountManager.getUserData(account, Constants.PARAM_PORT));
+			final String sEnc = mAccountManager.getUserData(account, Constants.PARAM_ENCRYPTION);
 			int encryption = 0;
 			if (!TextUtils.isEmpty(sEnc)) {
 				encryption = Integer.parseInt(sEnc);
 			}
 			LDAPServerInstance ldapServer = new LDAPServerInstance(host, port, encryption, username, authtoken);
 
-			final String searchFilter = mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_SEARCHFILTER);
-			final String baseDN = mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_BASEDN);
+			final String searchFilter = mAccountManager.getUserData(account, Constants.PARAM_SEARCHFILTER);
+			final String baseDN = mAccountManager.getUserData(account, Constants.PARAM_BASEDN);
 
 			// LDAP name mappings
 			final Bundle mappingBundle = new Bundle();
-			mappingBundle.putString(Contact.FIRSTNAME, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.FIRSTNAME));
-			mappingBundle.putString(Contact.LASTNAME, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.LASTNAME));
-			mappingBundle.putString(Contact.TELEPHONE, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.TELEPHONE));
-			mappingBundle.putString(Contact.MOBILE, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.MOBILE));
-			mappingBundle.putString(Contact.HOMEPHONE, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.HOMEPHONE));
-			mappingBundle.putString(Contact.MAIL, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.MAIL));
-			mappingBundle.putString(Contact.PHOTO, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.PHOTO));
-			mappingBundle.putString(Contact.STREET, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.STREET));
-			mappingBundle.putString(Contact.CITY, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.CITY));
-			mappingBundle.putString(Contact.ZIP, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.ZIP));
-			mappingBundle.putString(Contact.STATE, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.STATE));
-			mappingBundle.putString(Contact.COUNTRY, mAccountManager.getUserData(account, LDAPAuthenticatorActivity.PARAM_MAPPING + Contact.COUNTRY));
+			mappingBundle.putString(Contact.FIRSTNAME, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.FIRSTNAME));
+			mappingBundle.putString(Contact.LASTNAME, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.LASTNAME));
+			mappingBundle.putString(Contact.TELEPHONE, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.TELEPHONE));
+			mappingBundle.putString(Contact.MOBILE, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.MOBILE));
+			mappingBundle.putString(Contact.HOMEPHONE, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.HOMEPHONE));
+			mappingBundle.putString(Contact.MAIL, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.MAIL));
+			mappingBundle.putString(Contact.PHOTO, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.PHOTO));
+			mappingBundle.putString(Contact.STREET, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.STREET));
+			mappingBundle.putString(Contact.CITY, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.CITY));
+			mappingBundle.putString(Contact.ZIP, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.ZIP));
+			mappingBundle.putString(Contact.STATE, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.STATE));
+			mappingBundle.putString(Contact.COUNTRY, mAccountManager.getUserData(account, Constants.PARAM_MAPPING + Contact.COUNTRY));
 			users = LDAPUtilities.fetchContacts(ldapServer, baseDN, searchFilter, mappingBundle, mLastUpdated, this.getContext());
 			if (users == null) {
 				syncResult.stats.numIoExceptions++;

@@ -46,8 +46,8 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.util.Log;
 import de.danielweisser.android.ldapsync.Constants;
-import de.danielweisser.android.ldapsync.client.Address;
-import de.danielweisser.android.ldapsync.client.Contact;
+import de.danielweisser.android.ldapsync.model.Address;
+import de.danielweisser.android.ldapsync.model.Contact;
 import de.danielweisser.android.ldapsync.syncadapter.Logger;
 
 /**

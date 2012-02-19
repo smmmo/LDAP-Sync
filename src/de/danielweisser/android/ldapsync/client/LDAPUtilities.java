@@ -38,6 +38,7 @@ import com.unboundid.ldap.sdk.SearchScope;
 
 import de.danielweisser.android.ldapsync.R;
 import de.danielweisser.android.ldapsync.authenticator.LDAPAuthenticatorActivity;
+import de.danielweisser.android.ldapsync.model.Contact;
 import de.danielweisser.android.ldapsync.syncadapter.SyncService;
 
 /**
