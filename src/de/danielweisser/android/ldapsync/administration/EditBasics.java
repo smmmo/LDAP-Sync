@@ -92,6 +92,7 @@ public class EditBasics extends Activity {
 			
 		};
 		boolean success = LDAPUtilities.authenticate(ldapServer, handler, this);
+		LDAPUtilities.getAttributesFromLdap(ldapServer);
 	}
 	
 

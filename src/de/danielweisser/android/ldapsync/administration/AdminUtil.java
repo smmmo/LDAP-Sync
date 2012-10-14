@@ -77,7 +77,7 @@ public class AdminUtil {
 		Account[] accounts = am.getAccountsByType(Constants.ACCOUNT_TYPE);
 		if(accounts.length < 1)
 		{
-			Log.e(TAG, "No account found, please setup your account first");
+			Log.e(TAG, "No account found, please add an LDAPSync account in settings/accounts/Add account first");
 			return null;
 		}
 		else if (accounts.length >1)

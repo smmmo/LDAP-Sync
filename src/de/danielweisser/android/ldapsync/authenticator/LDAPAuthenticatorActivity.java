@@ -235,7 +235,7 @@ public class LDAPAuthenticatorActivity extends AccountAuthenticatorActivity {
 		data.setmSearchFilter(data.getmSearchFilterEdit().getText().toString());
 		data.setmBaseDN(data.getmBaseDNSpinner().getText().toString());
 		data.setmFirstName(data.getmFirstNameEdit().getText().toString());
-		data.setmLastName(data.getmLastNameEdit().getText().toString());
+		data.setmLastName((String)data.getmLastNameEdit().getSelectedItem());
 		data.setmOfficePhone(data.getmOfficePhoneEdit().getText().toString());
 		data.setmCellPhone(data.getmCellPhoneEdit().getText().toString());
 		data.setmHomePhone(data.getmHomePhoneEdit().getText().toString());

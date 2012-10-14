@@ -19,6 +19,7 @@ package de.danielweisser.android.ldapsync.client;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -35,6 +36,8 @@ import com.unboundid.ldap.sdk.RootDSE;
 import com.unboundid.ldap.sdk.SearchResult;
 import com.unboundid.ldap.sdk.SearchResultEntry;
 import com.unboundid.ldap.sdk.SearchScope;
+import com.unboundid.ldap.sdk.schema.AttributeTypeDefinition;
+import com.unboundid.ldap.sdk.schema.Schema;
 
 import de.danielweisser.android.ldapsync.R;
 import de.danielweisser.android.ldapsync.authenticator.LDAPAuthenticatorActivity;
@@ -214,5 +217,22 @@ public class LDAPUtilities {
 			}
 		}
 		return false;
+	}
+	
+	public static List<AttributeTypeDefinition> getAttributesFromLdap(LDAPServerInstance ldapServer) {
+		List<AttributeTypeDefinition> attributesKnownInLdap = new ArrayList<AttributeTypeDefinition>();
+		try {
+			Log.i(TAG, "Getting AttributeTypes from Ldap..");
+			
+			Schema schema = ldapServer.getConnection().getSchema();
+			Set<AttributeTypeDefinition> attributeTypes = schema.getAttributeTypes();
+			for (AttributeTypeDefinition attributeTypeDefinition : attributeTypes) {
+				attributesKnownInLdap.add(attributeTypeDefinition);
+			}
+			Log.i(TAG, "AttributeTypes found: " +attributesKnownInLdap.size());
+		} catch (LDAPException e) {
+			Log.e(TAG, "Error while getting attributeTypes from Ldap" ,e);
+		}
+		return attributesKnownInLdap;
 	}
 }

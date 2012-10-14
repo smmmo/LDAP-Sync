@@ -66,8 +66,13 @@ public class SettingsUtil {
 	public void setLdapMappingValues(SettingsData data, Activity activity) {
 		data.setmFirstNameEdit((EditText) activity.findViewById(R.id.firstname_edit));
 		data.getmFirstNameEdit().setText(data.getmFirstName());
-		data.setmLastNameEdit((EditText) activity.findViewById(R.id.lastname_edit));
-		data.getmLastNameEdit().setText(data.getmLastName());
+		
+		data.setmLastNameEdit((Spinner) activity.findViewById(R.id.lastname_spinner));
+		@SuppressWarnings("unchecked")
+		ArrayAdapter<String> adapter = (ArrayAdapter<String>) data.getmLastNameEdit().getAdapter();
+		int spinnerPosition = adapter.getPosition(data.getmLastName());
+		data.getmLastNameEdit().setSelection(spinnerPosition);
+		
 		data.setmOfficePhoneEdit((EditText) activity.findViewById(R.id.officephone_edit));
 		data.getmOfficePhoneEdit().setText(data.getmOfficePhone());
 		data.setmCellPhoneEdit((EditText) activity.findViewById(R.id.cellphone_edit));

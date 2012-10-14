@@ -40,7 +40,7 @@ public class SettingsData {
 	private String mFirstName;
 	private EditText mFirstNameEdit;
 	private String mLastName;
-	private EditText mLastNameEdit;
+	private Spinner mLastNameEdit;
 	private String mCellPhone;
 	private EditText mCellPhoneEdit;
 	private String mHomePhone;
@@ -260,11 +260,11 @@ public class SettingsData {
 		this.mLastName = mLastName;
 	}
 
-	public EditText getmLastNameEdit() {
+	public Spinner getmLastNameEdit() {
 		return mLastNameEdit;
 	}
 
-	public void setmLastNameEdit(EditText mLastNameEdit) {
+	public void setmLastNameEdit(Spinner mLastNameEdit) {
 		this.mLastNameEdit = mLastNameEdit;
 	}
 
