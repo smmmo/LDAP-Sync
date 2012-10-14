@@ -30,34 +30,17 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/firstname_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
-
+        <Spinner
+		    android:id="@+id/firstname_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
+  
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_activity_lastname_label"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
-
-<!--         <EditText -->
-<!--             android:id="@+id/lastname_edit" -->
-<!--             android:layout_width="fill_parent" -->
-<!--             android:layout_height="wrap_content" -->
-<!--             android:autoText="false" -->
-<!--             android:capitalize="none" -->
-<!--             android:inputType="text" -->
-<!--             android:minWidth="300dip" -->
-<!--             android:scrollHorizontally="true" -->
-<!--             android:singleLine="true" /> -->
 
 		<Spinner
 		    android:id="@+id/lastname_spinner"
@@ -71,16 +54,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/officephone_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/officephone_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,16 +66,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/cellphone_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/cellphone_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,16 +78,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/homephone_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/homephone_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -125,16 +90,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/mail_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/mail_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -143,16 +102,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/image_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/image_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -161,16 +114,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/street_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/street_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -179,16 +126,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/city_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/city_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -197,16 +138,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/state_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/state_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -215,16 +150,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/zip_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/zip_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -233,16 +162,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/country_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:capitalize="none"
-            android:inputType="text"
-            android:minWidth="300dip"
-            android:scrollHorizontally="true"
-            android:singleLine="true" />
+        <Spinner
+		    android:id="@+id/country_spinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="fill_parent"

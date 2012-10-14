@@ -82,19 +82,15 @@ public class EditBasics extends Activity {
 	private void testLdapSetting()
 	{
 		LDAPServerInstance ldapServer = new LDAPServerInstance(data.getmHost(), data.getmPort(), data.getmEncryption(), data.getmUsername(), data.getmPassword());
-		Handler handler = new Handler(){
-			@Override
-			public void handleMessage(Message msg) {
-				// TODO Auto-generated method stub
-				;
-			}
-			
-			
-		};
-		boolean success = LDAPUtilities.authenticate(ldapServer, handler, this);
-		LDAPUtilities.getAttributesFromLdap(ldapServer);
+		LDAPUtilities.authenticate(ldapServer, handler, this);
+
 	}
 	
-
-	
+	static Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			;
+		}
+	};
 }

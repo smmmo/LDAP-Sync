@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import de.danielweisser.android.ldapsync.R;
 
 public class SettingsUtil {
+	
+	public static final String TAG = "SettingsUtil";
 
 	/**
 	 * Sets the default LDAP mapping attributes
@@ -63,36 +65,45 @@ public class SettingsUtil {
 		});
 	}
 	
-	public void setLdapMappingValues(SettingsData data, Activity activity) {
-		data.setmFirstNameEdit((EditText) activity.findViewById(R.id.firstname_edit));
-		data.getmFirstNameEdit().setText(data.getmFirstName());
-		
+	public void initLdapMappingGuiElements(SettingsData data, Activity activity) {
+		data.setmFirstNameEdit((Spinner) activity.findViewById(R.id.firstname_spinner));
 		data.setmLastNameEdit((Spinner) activity.findViewById(R.id.lastname_spinner));
-		@SuppressWarnings("unchecked")
-		ArrayAdapter<String> adapter = (ArrayAdapter<String>) data.getmLastNameEdit().getAdapter();
-		int spinnerPosition = adapter.getPosition(data.getmLastName());
-		data.getmLastNameEdit().setSelection(spinnerPosition);
-		
-		data.setmOfficePhoneEdit((EditText) activity.findViewById(R.id.officephone_edit));
-		data.getmOfficePhoneEdit().setText(data.getmOfficePhone());
-		data.setmCellPhoneEdit((EditText) activity.findViewById(R.id.cellphone_edit));
-		data.getmCellPhoneEdit().setText(data.getmCellPhone());
-		data.setmHomePhoneEdit((EditText) activity.findViewById(R.id.homephone_edit));
-		data.getmHomePhoneEdit().setText(data.getmHomePhone());
-		data.setmEmailEdit((EditText) activity.findViewById(R.id.mail_edit));
-		data.getmEmailEdit().setText(data.getmEmail());
-		data.setmImageEdit((EditText) activity.findViewById(R.id.image_edit));
-		data.getmImageEdit().setText(data.getmImage());
-		data.setmStreetEdit((EditText) activity.findViewById(R.id.street_edit));
-		data.getmStreetEdit().setText(data.getmStreet());
-		data.setmCityEdit((EditText) activity.findViewById(R.id.city_edit));
-		data.getmCityEdit().setText(data.getmCity());
-		data.setmZipEdit((EditText) activity.findViewById(R.id.zip_edit));
-		data.getmZipEdit().setText(data.getmZip());
-		data.setmStateEdit((EditText) activity.findViewById(R.id.state_edit));
-		data.getmStateEdit().setText(data.getmState());
-		data.setmCountryEdit((EditText) activity.findViewById(R.id.country_edit));
-		data.getmCountryEdit().setText(data.getmCountry());
+		data.setmOfficePhoneEdit((Spinner) activity.findViewById(R.id.officephone_spinner));
+		data.setmCellPhoneEdit((Spinner) activity.findViewById(R.id.cellphone_spinner));
+		data.setmHomePhoneEdit((Spinner) activity.findViewById(R.id.homephone_spinner));
+		data.setmEmailEdit((Spinner) activity.findViewById(R.id.mail_spinner));
+		data.setmImageEdit((Spinner) activity.findViewById(R.id.image_spinner));
+		data.setmStreetEdit((Spinner) activity.findViewById(R.id.street_spinner));
+		data.setmCityEdit((Spinner) activity.findViewById(R.id.city_spinner));
+		data.setmZipEdit((Spinner) activity.findViewById(R.id.zip_spinner));
+		data.setmStateEdit((Spinner) activity.findViewById(R.id.state_spinner));
+		data.setmCountryEdit((Spinner) activity.findViewById(R.id.country_spinner));
+	}
+	
+	public void setLdapMappingValues(SettingsData data) {
+        data.getmFirstNameEdit().setSelection(getSpinnerPos(data.getmFirstNameEdit(), data.getmFirstName()));
+        data.getmLastNameEdit().setSelection(getSpinnerPos(data.getmLastNameEdit(), data.getmLastName()));
+		data.getmOfficePhoneEdit().setSelection(getSpinnerPos(data.getmOfficePhoneEdit(), data.getmOfficePhone()));
+		data.getmCellPhoneEdit().setSelection(getSpinnerPos(data.getmCellPhoneEdit(), data.getmCellPhone()));
+		data.getmHomePhoneEdit().setSelection(getSpinnerPos(data.getmHomePhoneEdit(), data.getmHomePhone()));
+		data.getmEmailEdit().setSelection(getSpinnerPos(data.getmEmailEdit(), data.getmEmail()));
+		data.getmImageEdit().setSelection(getSpinnerPos(data.getmImageEdit(), data.getmImage()));
+		data.getmStreetEdit().setSelection(getSpinnerPos(data.getmStreetEdit(), data.getmStreet()));
+		data.getmCityEdit().setSelection(getSpinnerPos(data.getmCityEdit(), data.getmCity()));
+		data.getmZipEdit().setSelection(getSpinnerPos(data.getmZipEdit(), data.getmZip()));
+		data.getmStateEdit().setSelection(getSpinnerPos(data.getmStateEdit(), data.getmState()));
+		data.getmCountryEdit().setSelection(getSpinnerPos(data.getmCountryEdit(), data.getmCountry()));
+	}
+	
+	private int getSpinnerPos(Spinner spinner, String valuetoSearch)
+	{
+		int spinnerPosition = -1;
+		ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinner.getAdapter();
+		if(adapter != null)
+		{
+			spinnerPosition = adapter.getPosition(valuetoSearch);
+		}
+		return spinnerPosition;
 	}
 
 	public void setConnectionValues(SettingsData data, boolean setBaseDN) {

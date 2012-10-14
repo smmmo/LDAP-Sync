@@ -84,7 +84,15 @@ public class LDAPAuthenticatorActivity extends AccountAuthenticatorActivity {
 		settingsUtil.setConnectionValues(data, false);
 
 		// Set values for LDAP mapping
-		settingsUtil.setLdapMappingValues(data, this);
+		try
+		{
+			settingsUtil.initLdapMappingGuiElements(data, this);
+			settingsUtil.setLdapMappingValues(data);
+		}
+		catch (IndexOutOfBoundsException ioobe)
+		{
+			Log.e(TAG, "Element not found, maybe not allowed. Skipping setLdapMappingValues()", ioobe);
+		}
 	}
 
 
@@ -234,18 +242,18 @@ public class LDAPAuthenticatorActivity extends AccountAuthenticatorActivity {
 	public void saveAccount(View view) {
 		data.setmSearchFilter(data.getmSearchFilterEdit().getText().toString());
 		data.setmBaseDN(data.getmBaseDNSpinner().getText().toString());
-		data.setmFirstName(data.getmFirstNameEdit().getText().toString());
+		data.setmFirstName((String)data.getmFirstNameEdit().getSelectedItem());
 		data.setmLastName((String)data.getmLastNameEdit().getSelectedItem());
-		data.setmOfficePhone(data.getmOfficePhoneEdit().getText().toString());
-		data.setmCellPhone(data.getmCellPhoneEdit().getText().toString());
-		data.setmHomePhone(data.getmHomePhoneEdit().getText().toString());
-		data.setmEmail(data.getmEmailEdit().getText().toString());
-		data.setmImage(data.getmImageEdit().getText().toString());
-		data.setmStreet(data.getmStreetEdit().getText().toString());
-		data.setmCity(data.getmCityEdit().getText().toString());
-		data.setmZip(data.getmZipEdit().getText().toString());
-		data.setmState(data.getmStateEdit().getText().toString());
-		data.setmCountry(data.getmCountryEdit().getText().toString());
+		data.setmOfficePhone((String)data.getmOfficePhoneEdit().getSelectedItem());
+		data.setmCellPhone((String)data.getmCellPhoneEdit().getSelectedItem());
+		data.setmHomePhone((String)data.getmHomePhoneEdit().getSelectedItem());
+		data.setmEmail((String)data.getmEmailEdit().getSelectedItem());
+		data.setmImage((String)data.getmImageEdit().getSelectedItem());
+		data.setmStreet((String)data.getmStreetEdit().getSelectedItem());
+		data.setmCity((String)data.getmCityEdit().getSelectedItem());
+		data.setmZip((String)data.getmZipEdit().getSelectedItem());
+		data.setmState((String)data.getmStateEdit().getSelectedItem());
+		data.setmCountry((String)data.getmCountryEdit().getSelectedItem());
 
 		if (!data.ismConfirmCredentials()) {
 			finishLogin();

@@ -8,6 +8,7 @@ import android.accounts.AccountManager;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -22,6 +23,8 @@ import de.danielweisser.android.ldapsync.client.LDAPServerInstance;
 import de.danielweisser.android.ldapsync.client.LDAPUtilities;
 
 public class EditMappings extends Activity {
+	
+	public static final String TAG = "EditMappings";
 
 	private SettingsUtil settingsUtil;
 	private AdminUtil adminUtil;
@@ -48,8 +51,16 @@ public class EditMappings extends Activity {
 		setContentView(R.layout.settings_mappings);
 
 		// Set values for LDAP mapping
+		settingsUtil.initLdapMappingGuiElements(data, this);
 		initSpinners();
-		settingsUtil.setLdapMappingValues(data, this);
+		try
+		{
+			settingsUtil.setLdapMappingValues(data);
+		}
+		catch (IndexOutOfBoundsException ioobe)
+		{
+			Log.e(TAG, "Element not found, maybe not allowed. Skipping setLdapMappingValues()", ioobe);
+		}
     }
 	
 	
@@ -64,7 +75,20 @@ public class EditMappings extends Activity {
 		
 		Collections.sort(attributeNames);
 
-		Spinner spinner = (Spinner) findViewById(R.id.lastname_spinner);
+		createSpinner(data.getmFirstNameEdit(), attributeNames);
+		createSpinner(data.getmLastNameEdit(), attributeNames);
+		createSpinner(data.getmOfficePhoneEdit(), attributeNames);
+		createSpinner(data.getmCellPhoneEdit(), attributeNames);
+		createSpinner(data.getmHomePhoneEdit(), attributeNames);
+		createSpinner(data.getmEmailEdit(), attributeNames);
+		createSpinner(data.getmStreetEdit(), attributeNames);
+		createSpinner(data.getmCityEdit(), attributeNames);
+		createSpinner(data.getmZipEdit(), attributeNames);
+		createSpinner(data.getmStateEdit(), attributeNames);
+		createSpinner(data.getmCountryEdit(), attributeNames);
+	}
+
+	protected void createSpinner(Spinner spinner, List<String> attributeNames) {
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 			android.R.layout.simple_spinner_item, attributeNames);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -80,17 +104,17 @@ public class EditMappings extends Activity {
 	
 	private void mapGui2Data(SettingsData data) {
 		
-		data.setmFirstName(data.getmFirstNameEdit().getText().toString());
+		data.setmFirstName((String)data.getmFirstNameEdit().getSelectedItem());
 		data.setmLastName((String)data.getmLastNameEdit().getSelectedItem());
-		data.setmOfficePhone(data.getmOfficePhoneEdit().getText().toString());
-		data.setmCellPhone(data.getmCellPhoneEdit().getText().toString());
-		data.setmHomePhone(data.getmHomePhoneEdit().getText().toString());
-		data.setmEmail(data.getmEmailEdit().getText().toString());
-		data.setmStreet(data.getmStreetEdit().getText().toString());
-		data.setmCity(data.getmCityEdit().getText().toString());
-		data.setmZip(data.getmZipEdit().getText().toString());
-		data.setmState(data.getmStateEdit().getText().toString());
-		data.setmCountry(data.getmCountryEdit().getText().toString());
+		data.setmOfficePhone((String)data.getmOfficePhoneEdit().getSelectedItem());
+		data.setmCellPhone((String)data.getmCellPhoneEdit().getSelectedItem());
+		data.setmHomePhone((String)data.getmHomePhoneEdit().getSelectedItem());
+		data.setmEmail((String)data.getmEmailEdit().getSelectedItem());
+		data.setmStreet((String)data.getmStreetEdit().getSelectedItem());
+		data.setmCity((String)data.getmCityEdit().getSelectedItem());
+		data.setmZip((String)data.getmZipEdit().getSelectedItem());
+		data.setmState((String)data.getmStateEdit().getSelectedItem());
+		data.setmCountry((String)data.getmCountryEdit().getSelectedItem());
 	}
 
 }

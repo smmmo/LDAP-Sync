@@ -19,6 +19,7 @@ public class SettingsData {
 	/** for posting authentication attempts back to UI thread */
 	private Handler mHandler;
 	
+	// basic data
 	private AccountManager mAccountManager;
 	private Thread mAuthThread;
 	private String mAuthtoken;
@@ -37,30 +38,32 @@ public class SettingsData {
 	private AutoCompleteTextView mBaseDNSpinner;
 	private int mPort;
 	private EditText mPortEdit;
+	
+	// Mappings
 	private String mFirstName;
-	private EditText mFirstNameEdit;
+	private Spinner mFirstNameEdit;
 	private String mLastName;
 	private Spinner mLastNameEdit;
 	private String mCellPhone;
-	private EditText mCellPhoneEdit;
+	private Spinner mCellPhoneEdit;
 	private String mHomePhone;
-	private EditText mHomePhoneEdit;
+	private Spinner mHomePhoneEdit;
 	private String mOfficePhone;
-	private EditText mOfficePhoneEdit;
+	private Spinner mOfficePhoneEdit;
 	private String mEmail;
-	private EditText mEmailEdit;
+	private Spinner mEmailEdit;
 	private String mStreet;
-	private EditText mStreetEdit;
+	private Spinner mStreetEdit;
 	private String mCity;
-	private EditText mCityEdit;
+	private Spinner mCityEdit;
 	private String mState;
-	private EditText mStateEdit;
+	private Spinner mStateEdit;
 	private String mZip;
-	private EditText mZipEdit;
+	private Spinner mZipEdit;
 	private String mCountry;
-	private EditText mCountryEdit;
+	private Spinner mCountryEdit;
 	private String mImage;
-	private EditText mImageEdit;
+	private Spinner mImageEdit;
 
 	public SettingsData(boolean mRequestNewAccount, Boolean mConfirmCredentials, Handler mHandler) {
 		this.mRequestNewAccount = mRequestNewAccount;
@@ -244,11 +247,11 @@ public class SettingsData {
 		this.mFirstName = mFirstName;
 	}
 
-	public EditText getmFirstNameEdit() {
+	public Spinner getmFirstNameEdit() {
 		return mFirstNameEdit;
 	}
 
-	public void setmFirstNameEdit(EditText mFirstNameEdit) {
+	public void setmFirstNameEdit(Spinner mFirstNameEdit) {
 		this.mFirstNameEdit = mFirstNameEdit;
 	}
 
@@ -276,11 +279,11 @@ public class SettingsData {
 		this.mCellPhone = mCellPhone;
 	}
 
-	public EditText getmCellPhoneEdit() {
+	public Spinner getmCellPhoneEdit() {
 		return mCellPhoneEdit;
 	}
 
-	public void setmCellPhoneEdit(EditText mCellPhoneEdit) {
+	public void setmCellPhoneEdit(Spinner mCellPhoneEdit) {
 		this.mCellPhoneEdit = mCellPhoneEdit;
 	}
 
@@ -292,11 +295,11 @@ public class SettingsData {
 		this.mHomePhone = mHomePhone;
 	}
 
-	public EditText getmHomePhoneEdit() {
+	public Spinner getmHomePhoneEdit() {
 		return mHomePhoneEdit;
 	}
 
-	public void setmHomePhoneEdit(EditText mHomePhoneEdit) {
+	public void setmHomePhoneEdit(Spinner mHomePhoneEdit) {
 		this.mHomePhoneEdit = mHomePhoneEdit;
 	}
 
@@ -308,11 +311,11 @@ public class SettingsData {
 		this.mOfficePhone = mOfficePhone;
 	}
 
-	public EditText getmOfficePhoneEdit() {
+	public Spinner getmOfficePhoneEdit() {
 		return mOfficePhoneEdit;
 	}
 
-	public void setmOfficePhoneEdit(EditText mOfficePhoneEdit) {
+	public void setmOfficePhoneEdit(Spinner mOfficePhoneEdit) {
 		this.mOfficePhoneEdit = mOfficePhoneEdit;
 	}
 
@@ -324,11 +327,11 @@ public class SettingsData {
 		this.mEmail = mEmail;
 	}
 
-	public EditText getmEmailEdit() {
+	public Spinner getmEmailEdit() {
 		return mEmailEdit;
 	}
 
-	public void setmEmailEdit(EditText mEmailEdit) {
+	public void setmEmailEdit(Spinner mEmailEdit) {
 		this.mEmailEdit = mEmailEdit;
 	}
 
@@ -340,11 +343,11 @@ public class SettingsData {
 		this.mStreet = mStreet;
 	}
 
-	public EditText getmStreetEdit() {
+	public Spinner getmStreetEdit() {
 		return mStreetEdit;
 	}
 
-	public void setmStreetEdit(EditText mStreetEdit) {
+	public void setmStreetEdit(Spinner mStreetEdit) {
 		this.mStreetEdit = mStreetEdit;
 	}
 
@@ -356,11 +359,11 @@ public class SettingsData {
 		this.mCity = mCity;
 	}
 
-	public EditText getmCityEdit() {
+	public Spinner getmCityEdit() {
 		return mCityEdit;
 	}
 
-	public void setmCityEdit(EditText mCityEdit) {
+	public void setmCityEdit(Spinner mCityEdit) {
 		this.mCityEdit = mCityEdit;
 	}
 
@@ -372,11 +375,11 @@ public class SettingsData {
 		this.mState = mState;
 	}
 
-	public EditText getmStateEdit() {
+	public Spinner getmStateEdit() {
 		return mStateEdit;
 	}
 
-	public void setmStateEdit(EditText mStateEdit) {
+	public void setmStateEdit(Spinner mStateEdit) {
 		this.mStateEdit = mStateEdit;
 	}
 
@@ -388,11 +391,11 @@ public class SettingsData {
 		this.mZip = mZip;
 	}
 
-	public EditText getmZipEdit() {
+	public Spinner getmZipEdit() {
 		return mZipEdit;
 	}
 
-	public void setmZipEdit(EditText mZipEdit) {
+	public void setmZipEdit(Spinner mZipEdit) {
 		this.mZipEdit = mZipEdit;
 	}
 
@@ -404,11 +407,11 @@ public class SettingsData {
 		this.mCountry = mCountry;
 	}
 
-	public EditText getmCountryEdit() {
+	public Spinner getmCountryEdit() {
 		return mCountryEdit;
 	}
 
-	public void setmCountryEdit(EditText mCountryEdit) {
+	public void setmCountryEdit(Spinner mCountryEdit) {
 		this.mCountryEdit = mCountryEdit;
 	}
 
@@ -420,11 +423,11 @@ public class SettingsData {
 		this.mImage = mImage;
 	}
 
-	public EditText getmImageEdit() {
+	public Spinner getmImageEdit() {
 		return mImageEdit;
 	}
 
-	public void setmImageEdit(EditText mImageEdit) {
+	public void setmImageEdit(Spinner mImageEdit) {
 		this.mImageEdit = mImageEdit;
 	}
 	
