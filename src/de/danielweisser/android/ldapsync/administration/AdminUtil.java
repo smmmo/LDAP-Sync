@@ -15,7 +15,8 @@ public class AdminUtil {
 	protected SettingsData loadPersistentConnectionData(SettingsData data) {
 		HashMap<String, String> persistentProperties = getPersistentValues(data.getmAccountManager(), Constants.LDAP_SERVER_PARAMS);
 		
-		data.setmHost(persistentProperties.get(Constants.PARAM_HOST));
+		String hostName = persistentProperties.get(Constants.PARAM_HOST);
+		data.setmHost(hostName == null ? "todo" : hostName);
 
 		String encryption = (persistentProperties.get(Constants.PARAM_ENCRYPTION) == null ? "1" : persistentProperties.get(Constants.PARAM_ENCRYPTION));
 		data.setmEncryption(Integer.valueOf(encryption));
@@ -24,7 +25,9 @@ public class AdminUtil {
 		Integer portAsInteger = Integer.valueOf(port);
 		data.setmPort(portAsInteger);
 		
-		data.setmUsername(persistentProperties.get(Constants.PARAM_USERNAME));
+		String userName = persistentProperties.get(Constants.PARAM_USERNAME);
+		data.setmUsername(userName == null ? "todo" : userName);
+		
 		data.setmPassword(persistentProperties.get(Constants.PARAM_PASSWORD));
 		data.setmBaseDN(persistentProperties.get(Constants.PARAM_BASEDN));
 		data.setmSearchFilter(persistentProperties.get(Constants.PARAM_SEARCHFILTER));
@@ -72,7 +75,7 @@ public class AdminUtil {
 		return retValues;
 	}
 	
-    private Account getFirstAccount(AccountManager am)
+    public Account getFirstAccount(AccountManager am)
     {
 		Account[] accounts = am.getAccountsByType(Constants.ACCOUNT_TYPE);
 		if(accounts.length < 1)

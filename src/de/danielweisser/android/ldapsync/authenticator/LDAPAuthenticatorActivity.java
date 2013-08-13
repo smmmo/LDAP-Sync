@@ -35,6 +35,7 @@ import android.widget.Spinner;
 import android.widget.ViewFlipper;
 import de.danielweisser.android.ldapsync.Constants;
 import de.danielweisser.android.ldapsync.R;
+import de.danielweisser.android.ldapsync.administration.AdminUtil;
 import de.danielweisser.android.ldapsync.client.LDAPServerInstance;
 import de.danielweisser.android.ldapsync.client.LDAPUtilities;
 import de.danielweisser.android.ldapsync.model.Contact;
@@ -84,14 +85,17 @@ public class LDAPAuthenticatorActivity extends AccountAuthenticatorActivity {
 		settingsUtil.setConnectionValues(data, false);
 
 		// Set values for LDAP mapping
-		try
+		if(data != null)
 		{
-			settingsUtil.initLdapMappingGuiElements(data, this);
-			settingsUtil.setLdapMappingValues(data);
-		}
-		catch (IndexOutOfBoundsException ioobe)
-		{
-			Log.e(TAG, "Element not found, maybe not allowed. Skipping setLdapMappingValues()", ioobe);
+			try
+			{
+				settingsUtil.initLdapMappingGuiElements(data, this);
+				settingsUtil.setLdapMappingValues(data);
+			}
+			catch (IndexOutOfBoundsException ioobe)
+			{
+				Log.e(TAG, "Element not found, maybe not allowed. Skipping setLdapMappingValues()", ioobe);
+			}
 		}
 	}
 
@@ -241,25 +245,41 @@ public class LDAPAuthenticatorActivity extends AccountAuthenticatorActivity {
 	 */
 	public void saveAccount(View view) {
 		data.setmSearchFilter(data.getmSearchFilterEdit().getText().toString());
-		data.setmBaseDN(data.getmBaseDNSpinner().getText().toString());
-		data.setmFirstName((String)data.getmFirstNameEdit().getSelectedItem());
-		data.setmLastName((String)data.getmLastNameEdit().getSelectedItem());
-		data.setmOfficePhone((String)data.getmOfficePhoneEdit().getSelectedItem());
-		data.setmCellPhone((String)data.getmCellPhoneEdit().getSelectedItem());
-		data.setmHomePhone((String)data.getmHomePhoneEdit().getSelectedItem());
-		data.setmEmail((String)data.getmEmailEdit().getSelectedItem());
-		data.setmImage((String)data.getmImageEdit().getSelectedItem());
-		data.setmStreet((String)data.getmStreetEdit().getSelectedItem());
-		data.setmCity((String)data.getmCityEdit().getSelectedItem());
-		data.setmZip((String)data.getmZipEdit().getSelectedItem());
-		data.setmState((String)data.getmStateEdit().getSelectedItem());
-		data.setmCountry((String)data.getmCountryEdit().getSelectedItem());
-
+		if(data.getmFirstNameEdit()!= null)
+		{
+			data.setmBaseDN(data.getmBaseDNSpinner().getText().toString());
+			data.setmFirstName((String)data.getmFirstNameEdit().getSelectedItem());
+			data.setmLastName((String)data.getmLastNameEdit().getSelectedItem());
+			data.setmOfficePhone((String)data.getmOfficePhoneEdit().getSelectedItem());
+			data.setmCellPhone((String)data.getmCellPhoneEdit().getSelectedItem());
+			data.setmHomePhone((String)data.getmHomePhoneEdit().getSelectedItem());
+			data.setmEmail((String)data.getmEmailEdit().getSelectedItem());
+			data.setmImage((String)data.getmImageEdit().getSelectedItem());
+			data.setmStreet((String)data.getmStreetEdit().getSelectedItem());
+			data.setmCity((String)data.getmCityEdit().getSelectedItem());
+			data.setmZip((String)data.getmZipEdit().getSelectedItem());
+			data.setmState((String)data.getmStateEdit().getSelectedItem());
+			data.setmCountry((String)data.getmCountryEdit().getSelectedItem());
+		}
+		
 		if (!data.ismConfirmCredentials()) {
 			finishLogin();
 		} else {
 			finishConfirmCredentials(true);
 		}
+	}
+	
+	/**
+	 * Handles onClick event on the Done button. Saves the account with the account manager.
+	 * 
+	 * @param view
+	 *            The Done button for which this method is invoked
+	 */
+	public void syncNow(View view) {
+		AdminUtil adminUtil = new AdminUtil();
+		Account account = adminUtil.getFirstAccount(data.getmAccountManager());
+		String authority = "com.android.contacts";
+		ContentResolver.requestSync(account, authority, new Bundle());
 	}
 
 	@Override

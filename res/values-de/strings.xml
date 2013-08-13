@@ -44,6 +44,7 @@
 	<string name="login_activity_country_label">Land</string>
 	<string name="login_activity_next_button">Weiter</string>
 	<string name="login_activity_done_button">Fertig</string>
+	<string name="login_activity_syncNow_button">Sync</string>
 
 	<!-- Message shown in dialog if the username or password is invalid. -->
 	<string name="login_activity_loginfail">Der Benutzername oder das Passwort ist ungültig.

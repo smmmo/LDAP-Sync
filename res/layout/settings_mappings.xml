@@ -179,8 +179,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="100dip"
-                android:onClick="saveAccount"
+                android:onClick="syncNow"
                 android:text="@string/login_activity_done_button" />
+
+            <Button
+                android:id="@+id/syncNow_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100dip"
+                android:onClick="saveAccount"
+                android:text="@string/login_activity_syncNow_button" />      
         </LinearLayout>
     </LinearLayout>
 

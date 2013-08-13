@@ -2,7 +2,9 @@ package de.danielweisser.android.ldapsync.administration;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -71,6 +73,7 @@ public class EditMappings extends Activity {
 		List<String> attributeNames = new ArrayList<String>();
 		for (AttributeTypeDefinition attr : attributesFromLdap) {
 			attributeNames.add(attr.getNameOrOID());
+			attr.getDescription();
 		}
 		
 		Collections.sort(attributeNames);
@@ -86,6 +89,19 @@ public class EditMappings extends Activity {
 		createSpinner(data.getmZipEdit(), attributeNames);
 		createSpinner(data.getmStateEdit(), attributeNames);
 		createSpinner(data.getmCountryEdit(), attributeNames);
+		
+		initDefaultSpinnerValues(attributeNames);
+	}
+
+	private void initDefaultSpinnerValues(List<String> attributeNames) {
+		Map<Spinner, String> defaultValues = new HashMap<Spinner, String>();
+		defaultValues.put(data.getmFirstNameEdit(), "givenName");
+		defaultValues.put(data.getmOfficePhoneEdit(), "homePhone");
+
+		for (Map.Entry<Spinner, String> entry : defaultValues.entrySet()) {
+			int attrIndex = attributeNames.indexOf(entry.getValue());
+			entry.getKey().setSelection(attrIndex);
+		}
 	}
 
 	protected void createSpinner(Spinner spinner, List<String> attributeNames) {
@@ -100,7 +116,6 @@ public class EditMappings extends Activity {
 
 		adminUtil.storeMappings(data.getmAccountManager(), data);
 	}
-
 	
 	private void mapGui2Data(SettingsData data) {
 		

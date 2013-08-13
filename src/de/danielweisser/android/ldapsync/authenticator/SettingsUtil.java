@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import de.danielweisser.android.ldapsync.R;
 
 public class SettingsUtil {
@@ -23,14 +24,14 @@ public class SettingsUtil {
 			data.setmSearchFilter("(objectClass=organizationalPerson)");
 			data.setmFirstName("givenName");
 			data.setmLastName("sn");
-			data.setmOfficePhone("telephonenumber");
+			data.setmOfficePhone("homePhone");
 			data.setmCellPhone("mobile");
-			data.setmHomePhone("homephone");
+			data.setmHomePhone("telephonenumber");
 			data.setmEmail("mail");
 			data.setmImage("jpegphoto");
-			data.setmStreet("street");
-			data.setmCity("l");
-			data.setmZip("postalCode");
+			data.setmStreet("mozillaHomeStreet");
+			data.setmCity("mozillaHomeLocalityName");
+			data.setmZip("mozillaHomePostalCode");
 			data.setmState("st");
 			data.setmCountry("co");
 			// mImage = "thumbnailphoto";
@@ -81,27 +82,31 @@ public class SettingsUtil {
 	}
 	
 	public void setLdapMappingValues(SettingsData data) {
-        data.getmFirstNameEdit().setSelection(getSpinnerPos(data.getmFirstNameEdit(), data.getmFirstName()));
-        data.getmLastNameEdit().setSelection(getSpinnerPos(data.getmLastNameEdit(), data.getmLastName()));
-		data.getmOfficePhoneEdit().setSelection(getSpinnerPos(data.getmOfficePhoneEdit(), data.getmOfficePhone()));
-		data.getmCellPhoneEdit().setSelection(getSpinnerPos(data.getmCellPhoneEdit(), data.getmCellPhone()));
-		data.getmHomePhoneEdit().setSelection(getSpinnerPos(data.getmHomePhoneEdit(), data.getmHomePhone()));
-		data.getmEmailEdit().setSelection(getSpinnerPos(data.getmEmailEdit(), data.getmEmail()));
-		data.getmImageEdit().setSelection(getSpinnerPos(data.getmImageEdit(), data.getmImage()));
-		data.getmStreetEdit().setSelection(getSpinnerPos(data.getmStreetEdit(), data.getmStreet()));
-		data.getmCityEdit().setSelection(getSpinnerPos(data.getmCityEdit(), data.getmCity()));
-		data.getmZipEdit().setSelection(getSpinnerPos(data.getmZipEdit(), data.getmZip()));
-		data.getmStateEdit().setSelection(getSpinnerPos(data.getmStateEdit(), data.getmState()));
-		data.getmCountryEdit().setSelection(getSpinnerPos(data.getmCountryEdit(), data.getmCountry()));
+		if (data != null && data.getmFirstNameEdit() != null) {
+			data.getmFirstNameEdit().setSelection(getSpinnerPos(data.getmFirstNameEdit(), data.getmFirstName()));
+			data.getmLastNameEdit().setSelection(getSpinnerPos(data.getmLastNameEdit(), data.getmLastName()));
+			data.getmOfficePhoneEdit().setSelection(getSpinnerPos(data.getmOfficePhoneEdit(), data.getmOfficePhone()));
+			data.getmCellPhoneEdit().setSelection(getSpinnerPos(data.getmCellPhoneEdit(), data.getmCellPhone()));
+			data.getmHomePhoneEdit().setSelection(getSpinnerPos(data.getmHomePhoneEdit(), data.getmHomePhone()));
+			data.getmEmailEdit().setSelection(getSpinnerPos(data.getmEmailEdit(), data.getmEmail()));
+			data.getmImageEdit().setSelection(getSpinnerPos(data.getmImageEdit(), data.getmImage()));
+			data.getmStreetEdit().setSelection(getSpinnerPos(data.getmStreetEdit(), data.getmStreet()));
+			data.getmCityEdit().setSelection(getSpinnerPos(data.getmCityEdit(), data.getmCity()));
+			data.getmZipEdit().setSelection(getSpinnerPos(data.getmZipEdit(), data.getmZip()));
+			data.getmStateEdit().setSelection(getSpinnerPos(data.getmStateEdit(), data.getmState()));
+			data.getmCountryEdit().setSelection(getSpinnerPos(data.getmCountryEdit(), data.getmCountry()));
+		}
 	}
 	
 	private int getSpinnerPos(Spinner spinner, String valuetoSearch)
 	{
 		int spinnerPosition = -1;
-		ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinner.getAdapter();
-		if(adapter != null)
-		{
-			spinnerPosition = adapter.getPosition(valuetoSearch);
+		if (spinner != null) {
+			SpinnerAdapter adapter = spinner.getAdapter();
+			if (adapter != null) {
+				ArrayAdapter<String> adapterArray = (ArrayAdapter<String>) adapter;
+				spinnerPosition = adapterArray.getPosition(valuetoSearch);
+			}
 		}
 		return spinnerPosition;
 	}

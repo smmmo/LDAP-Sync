@@ -164,6 +164,7 @@
                 android:minWidth="100dip"
                 android:onClick="saveAccount"
                 android:text="@string/login_activity_done_button" />
+      
         </LinearLayout>
     </LinearLayout>
 

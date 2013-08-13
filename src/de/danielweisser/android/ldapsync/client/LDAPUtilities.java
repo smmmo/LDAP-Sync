@@ -40,6 +40,7 @@ import com.unboundid.ldap.sdk.schema.AttributeTypeDefinition;
 import com.unboundid.ldap.sdk.schema.Schema;
 
 import de.danielweisser.android.ldapsync.R;
+import de.danielweisser.android.ldapsync.administration.EditBasics;
 import de.danielweisser.android.ldapsync.authenticator.LDAPAuthenticatorActivity;
 import de.danielweisser.android.ldapsync.model.Contact;
 import de.danielweisser.android.ldapsync.syncadapter.SyncService;
@@ -93,7 +94,14 @@ public class LDAPUtilities {
 		}
 		handler.post(new Runnable() {
 			public void run() {
-				((LDAPAuthenticatorActivity) context).onAuthenticationResult(baseDNs, result, message);
+				if(context instanceof LDAPAuthenticatorActivity)
+				{
+					((LDAPAuthenticatorActivity) context).onAuthenticationResult(baseDNs, result, message);
+				}
+				else
+				{
+					EditBasics basics = (EditBasics)context;
+				}
 			}
 		});
 	}
