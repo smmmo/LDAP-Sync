@@ -47,6 +47,7 @@
 	
 	<string name="edit_settings_header">Properties</string>
 	<string name="edit_settings_done_button">Save</string>
+	<string name="login_activity_syncNow_button">Sync</string>
 
 	<!-- Message shown in dialog if the username or password is invalid. -->
 	<string name="login_activity_loginfail">The username or password isn\'t valid. A LDAP

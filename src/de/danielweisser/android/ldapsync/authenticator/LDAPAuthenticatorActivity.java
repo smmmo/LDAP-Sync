@@ -268,19 +268,6 @@ public class LDAPAuthenticatorActivity extends AccountAuthenticatorActivity {
 			finishConfirmCredentials(true);
 		}
 	}
-	
-	/**
-	 * Handles onClick event on the Done button. Saves the account with the account manager.
-	 * 
-	 * @param view
-	 *            The Done button for which this method is invoked
-	 */
-	public void syncNow(View view) {
-		AdminUtil adminUtil = new AdminUtil();
-		Account account = adminUtil.getFirstAccount(data.getmAccountManager());
-		String authority = "com.android.contacts";
-		ContentResolver.requestSync(account, authority, new Bundle());
-	}
 
 	@Override
 	protected Dialog onCreateDialog(int id) {

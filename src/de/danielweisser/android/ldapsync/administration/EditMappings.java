@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -31,7 +33,6 @@ public class EditMappings extends Activity {
 	private SettingsUtil settingsUtil;
 	private AdminUtil adminUtil;
 	protected SettingsData data = new SettingsData(true, false, new Handler());
-
 	
 	public EditMappings()
 	{
@@ -40,10 +41,9 @@ public class EditMappings extends Activity {
 	}
 	
 	public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);
 
 		data.setmAccountManager(AccountManager.get(this));
-		
 		adminUtil.logPersistentValues(data.getmAccountManager(), Constants.LDAP_MAPPINGS);
 
 		data = adminUtil.loadPersistentConnectionData(data);
@@ -54,28 +54,17 @@ public class EditMappings extends Activity {
 
 		// Set values for LDAP mapping
 		settingsUtil.initLdapMappingGuiElements(data, this);
-		initSpinners();
-		try
-		{
+		List<String> attributeNames = getAvailableAttributesFromLdap();
+		initSpinners(attributeNames);
+		try {
 			settingsUtil.setLdapMappingValues(data);
-		}
-		catch (IndexOutOfBoundsException ioobe)
-		{
+		} catch (IndexOutOfBoundsException ioobe) {
 			Log.e(TAG, "Element not found, maybe not allowed. Skipping setLdapMappingValues()", ioobe);
 		}
-    }
+	}
 	
 	
-	private void initSpinners() {
-		LDAPServerInstance ldapServer = new LDAPServerInstance(data.getmHost(), data.getmPort(), data.getmEncryption(), data.getmUsername(), data.getmPassword());
-		List<AttributeTypeDefinition> attributesFromLdap = LDAPUtilities.getAttributesFromLdap(ldapServer);
-		
-		List<String> attributeNames = new ArrayList<String>();
-		for (AttributeTypeDefinition attr : attributesFromLdap) {
-			attributeNames.add(attr.getNameOrOID());
-			attr.getDescription();
-		}
-		
+	private void initSpinners(List<String> attributeNames) {
 		Collections.sort(attributeNames);
 
 		createSpinner(data.getmFirstNameEdit(), attributeNames);
@@ -91,6 +80,18 @@ public class EditMappings extends Activity {
 		createSpinner(data.getmCountryEdit(), attributeNames);
 		
 		initDefaultSpinnerValues(attributeNames);
+	}
+
+	private List<String> getAvailableAttributesFromLdap() {
+		LDAPServerInstance ldapServer = new LDAPServerInstance(data.getmHost(), data.getmPort(), data.getmEncryption(), data.getmUsername(), data.getmPassword());
+		List<AttributeTypeDefinition> attributesFromLdap = LDAPUtilities.getAttributesFromLdap(ldapServer);
+		
+		List<String> attributeNames = new ArrayList<String>();
+		for (AttributeTypeDefinition attr : attributesFromLdap) {
+			attributeNames.add(attr.getNameOrOID());
+			attr.getDescription();
+		}
+		return attributeNames;
 	}
 
 	private void initDefaultSpinnerValues(List<String> attributeNames) {
@@ -130,6 +131,19 @@ public class EditMappings extends Activity {
 		data.setmZip((String)data.getmZipEdit().getSelectedItem());
 		data.setmState((String)data.getmStateEdit().getSelectedItem());
 		data.setmCountry((String)data.getmCountryEdit().getSelectedItem());
+	}
+	
+	/**
+	 * Handles onClick event on the Sync button. Saves the account with the account manager.
+	 * 
+	 * @param view
+	 *            The Done button for which this method is invoked
+	 */
+	public void syncNow(final View view) {
+		AdminUtil adminUtil = new AdminUtil();
+		Account account = adminUtil.getFirstAccount(data.getmAccountManager());
+		String authority = "com.android.contacts";
+		ContentResolver.requestSync(account, authority, new Bundle());
 	}
 
 }
